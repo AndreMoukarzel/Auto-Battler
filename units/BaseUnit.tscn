@@ -5,7 +5,6 @@
 
 [node name="BaseUnit" type="Sprite3D"]
 shaded = true
-double_sided = false
 alpha_cut = 2
 texture = ExtResource("1_4e0mk")
 script = ExtResource("2_mde87")

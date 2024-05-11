@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://corp2mgblapx2"]
 
-[ext_resource type="Script" path="res://combat/army.gd" id="1_t02kk"]
+[ext_resource type="Script" path="res://combat/Army.gd" id="1_dtubs"]
 
 [node name="Army" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-script = ExtResource("1_t02kk")
+script = ExtResource("1_dtubs")
 
 [node name="Position0" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.75)

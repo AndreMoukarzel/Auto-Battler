@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdfet3llmdvi8"]
+[gd_scene load_steps=7 format=3 uid="uid://bdfet3llmdvi8"]
 
-[ext_resource type="PackedScene" uid="uid://qs3m7waj70yu" path="res://combat/combat_logic.tscn" id="1_l8l1e"]
+[ext_resource type="Script" path="res://test_scene.gd" id="1_ptu7y"]
+[ext_resource type="PackedScene" uid="uid://dprmfccfu4ywe" path="res://combat/Battlefield.tscn" id="1_qw52c"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_86upm"]
 size = Vector3(20, 1, 60)
@@ -17,11 +18,12 @@ background_mode = 2
 sky = SubResource("Sky_dggux")
 
 [node name="TestScene" type="Node3D"]
+script = ExtResource("1_ptu7y")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.975188, 0.221378, 0, -0.221378, 0.975188, 0, 2.88064, 8.14616)
 
-[node name="CombatLogic" parent="." instance=ExtResource("1_l8l1e")]
+[node name="Battlefield" parent="." instance=ExtResource("1_qw52c")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -32,6 +34,7 @@ environment = SubResource("Environment_okcgk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.855798, -0.261792, 0.446178, 0.106424, 0.933145, 0.343388, -0.506245, -0.246386, 0.826444, 3.28163, 2.06736, 3.85853)
+light_color = Color(0.959232, 0.817427, 0.594911, 1)
 light_energy = 1.175
 shadow_enabled = true
 
@@ -43,20 +46,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Go" type="Button" parent="UI"]
+[node name="Buttons" type="HBoxContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -43.0
-offset_top = -31.0
-offset_right = 43.0
+offset_left = -88.0
+offset_top = -40.0
+offset_right = 88.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 5
+
+[node name="Go" type="Button" parent="UI/Buttons"]
+layout_mode = 2
 text = "Next Turn"
 
-[connection signal="pressed" from="UI/Go" to="CombatLogic" method="_on_go_pressed"]
+[node name="Reset" type="Button" parent="UI/Buttons"]
+layout_mode = 2
+disabled = true
+text = "Reset"
 
-[editable path="CombatLogic"]
+[connection signal="battle_done" from="Battlefield" to="." method="_on_battlefield_battle_done"]
+[connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
+[connection signal="pressed" from="UI/Buttons/Go" to="Battlefield" method="_on_go_pressed"]
+[connection signal="pressed" from="UI/Buttons/Reset" to="Battlefield" method="_on_reset_pressed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dprmfccfu4ywe"]
+
+[ext_resource type="Script" path="res://combat/Battlefield.gd" id="1_3temh"]
+[ext_resource type="PackedScene" uid="uid://corp2mgblapx2" path="res://combat/Army.tscn" id="1_mhrse"]
+[ext_resource type="Script" path="res://combat/PriorityDealer.gd" id="3_b2m7c"]
+
+[node name="Battlefield" type="Node3D"]
+script = ExtResource("1_3temh")
+
+[node name="Army1" parent="." instance=ExtResource("1_mhrse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 3)
+
+[node name="Army2" parent="." instance=ExtResource("1_mhrse")]
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.5, -3)
+
+[node name="PriorityDealer" type="Node" parent="."]
+script = ExtResource("3_b2m7c")

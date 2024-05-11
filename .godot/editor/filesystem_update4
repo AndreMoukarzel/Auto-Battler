@@ -1,8 +1,0 @@
-res://test_scene.tscn
-res://combat/combat_logic.tscn
-res://combat/army.tscn
-res://units/BaseUnit.tscn
-res://combat/CombatLogic.gd
-res://combat/army.gd
-res://units/BaseUnit.gd
-res://units/InstancedUnit.gd
