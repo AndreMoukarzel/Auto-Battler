@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://qs3m7waj70yu"]
+
+[ext_resource type="Script" path="res://combat/CombatLogic.gd" id="1_gy3mn"]
+[ext_resource type="PackedScene" uid="uid://corp2mgblapx2" path="res://combat/army.tscn" id="2_vpebh"]
+
+[node name="CombatLogic" type="Node"]
+script = ExtResource("1_gy3mn")
+
+[node name="Army1" parent="." instance=ExtResource("2_vpebh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 3)
+
+[node name="Army2" parent="." instance=ExtResource("2_vpebh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -3)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5

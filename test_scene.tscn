@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdfet3llmdvi8"]
+
+[ext_resource type="PackedScene" uid="uid://qs3m7waj70yu" path="res://combat/combat_logic.tscn" id="1_l8l1e"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_86upm"]
+size = Vector3(20, 1, 60)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1kyek"]
+sky_top_color = Color(0.101356, 0.45492, 0.781121, 1)
+sky_horizon_color = Color(0.715883, 0.636485, 0.601926, 1)
+
+[sub_resource type="Sky" id="Sky_dggux"]
+sky_material = SubResource("ProceduralSkyMaterial_1kyek")
+
+[sub_resource type="Environment" id="Environment_okcgk"]
+background_mode = 2
+sky = SubResource("Sky_dggux")
+
+[node name="TestScene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.975188, 0.221378, 0, -0.221378, 0.975188, 0, 2.88064, 8.14616)
+
+[node name="CombatLogic" parent="." instance=ExtResource("1_l8l1e")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_86upm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_okcgk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.855798, -0.261792, 0.446178, 0.106424, 0.933145, 0.343388, -0.506245, -0.246386, 0.826444, 3.28163, 2.06736, 3.85853)
+light_energy = 1.175
+shadow_enabled = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Go" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.0
+offset_top = -31.0
+offset_right = 43.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Next Turn"
+
+[connection signal="pressed" from="UI/Go" to="CombatLogic" method="_on_go_pressed"]
+
+[editable path="CombatLogic"]
