@@ -39,6 +39,7 @@ func battle_step():
 	if unit1 != null and unit2 == null:
 		$Army1.kill_unit(unit1.position)
 	elif unit1 == null and unit2 != null:
+		%PlayerHealth.text = str(int(%PlayerHealth.text) - unit2.curr_attack)
 		$Army2.kill_unit(unit2.position)
 
 

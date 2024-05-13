@@ -69,6 +69,17 @@ layout_mode = 2
 disabled = true
 text = "Reset"
 
+[node name="PlayerHealth" type="Label" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "20"
+
 [connection signal="battle_done" from="Battlefield" to="." method="_on_battlefield_battle_done"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
 [connection signal="pressed" from="UI/Buttons/Go" to="Battlefield" method="_on_go_pressed"]
