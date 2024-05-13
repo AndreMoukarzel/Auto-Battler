@@ -8,7 +8,7 @@ var base_units: Array = [null, null, null, null, null ,null]
 var units: Array = [null, null, null, null, null ,null] # We have this array to have the liberty to delete references to units
 
 
-func add_unit(unit: Sprite3D, pos: int):
+func add_unit(unit: String, pos: int):
 	if pos >= len(base_units):
 		push_error("Invalid unit position")
 		return

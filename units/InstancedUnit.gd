@@ -9,11 +9,16 @@ var curr_attack: int
 var curr_health: int
 
 
-func _init(unit, pos: int):
-	sprite = unit
-	base_attack = unit.attack
-	base_health = unit.health
+func _init(unit: String, pos: int):
+	var unit_data = UnitsData.Database[unit]
+	
+	base_attack = unit_data["Attack"]
+	base_health = unit_data["Health"]
 	position = pos
+	
+	sprite = Sprite3D.new()
+	sprite.texture = load(unit_data["Sprite"])
+	sprite.scale = Vector3(0.2, 0.2, 0.2)
 	reset()
 
 

@@ -2,21 +2,9 @@ extends Node3D
 
 signal column_done
 signal battle_done
-signal reset
 
 
-func _ready():
-	for i in range(3):
-		var new_unit = load("res://units/BaseUnit.tscn").instantiate()
-		new_unit.modulate = Color(0, 0, 1)
-		$Army1.add_unit(new_unit, i)
-	var unit = load("res://units/BaseUnit.tscn").instantiate()
-	unit.modulate = Color(0, 0, 1)
-	$Army1.add_unit(unit, 5)
-	for i in range(5):
-		var new_unit = load("res://units/BaseUnit.tscn").instantiate()
-		new_unit.modulate = Color(1, 0, 0)
-		$Army2.add_unit(new_unit, i)
+func reset():
 	$Army1.reset_troops()
 	$Army2.reset_troops()
 
@@ -51,9 +39,3 @@ func _on_go_pressed():
 		$PriorityDealer.next_column()
 		if $PriorityDealer.current_column == 0:
 			emit_signal("battle_done")
-
-
-func _on_reset_pressed():
-	$Army1.reset_troops()
-	$Army2.reset_troops()
-	emit_signal("reset")

@@ -81,6 +81,5 @@ grow_vertical = 0
 text = "20"
 
 [connection signal="battle_done" from="Battlefield" to="." method="_on_battlefield_battle_done"]
-[connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
 [connection signal="pressed" from="UI/Buttons/Go" to="Battlefield" method="_on_go_pressed"]
-[connection signal="pressed" from="UI/Buttons/Reset" to="Battlefield" method="_on_reset_pressed"]
+[connection signal="pressed" from="UI/Buttons/Reset" to="." method="_on_reset_pressed"]
