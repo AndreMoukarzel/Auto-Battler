@@ -46,6 +46,14 @@ func add_bonus_health(value: int):
 	curr_health = base_health + bonus_health
 
 
+func damage(value: int):
+	curr_health = max(0, curr_health - value)
+
+
+func is_dead() -> bool:
+	return curr_health <= 0
+
+
 func reset():
 	curr_attack = base_attack
 	curr_health = base_health
