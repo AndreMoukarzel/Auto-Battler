@@ -26,5 +26,9 @@ func get_ready_unit_from_column(Army):
 	return unit
 
 
+func done(unit):
+	done_units.append(unit)
+
+
 func next_column():
 	current_column = (current_column + 1) % 3
