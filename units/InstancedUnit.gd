@@ -31,6 +31,9 @@ func _init(unit: String, pos: int):
 	on_attack = unit_data["OnAttack"] if unit_data.has("OnAttack") else []
 	
 	sprite = Sprite3D.new()
+	sprite.shaded = true
+	sprite.double_sided = true
+	sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
 	sprite.texture = load(unit_data["Sprite"])
 	sprite.scale = Vector3(0.2, 0.2, 0.2)
 	reset()
