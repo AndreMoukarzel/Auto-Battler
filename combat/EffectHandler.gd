@@ -40,9 +40,9 @@ func modify_attribute(unit, attribute_effect):
 		if modifier == "sum":
 			unit.add_bonus_attack(value)
 		elif modifier == "mult":
-			unit.add_bonus_attack(int(unit.curr_attack * value))
+			unit.add_bonus_attack(int(unit.curr_attack * (value - 1.0)))
 	elif attr == "health":
 		if modifier == "sum":
 			unit.add_bonus_health(value)
 		elif modifier == "mult":
-			unit.add_bonus_health(int(unit.curr_health * value))
+			unit.add_bonus_health(int(unit.curr_health * (value - 1.0)))
