@@ -28,12 +28,9 @@ func add_unit(unit_name: String, pos: int):
 
 func reset_troops():
 	for pos in range(len(base_units)):
-		get_node("Position" + str(pos)).show()
 		if base_units[pos] != null:
 			base_units[pos].reset()
 		units[pos] = base_units[pos]
-		#if units[pos] != null:
-		#	get_node("Position" + str(pos)).add_child(units[pos].sprite.duplicate())
 
 
 func get_unit(pos: int):
@@ -41,5 +38,5 @@ func get_unit(pos: int):
 
 
 func kill_unit(pos: int):
+	units[pos].die()
 	units[pos] = null
-	get_node("Position" + str(pos)).hide()
