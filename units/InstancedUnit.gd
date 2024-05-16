@@ -1,10 +1,12 @@
-class_name InstancedUnit
+extends Sprite3D
 
-var name: String
+#class_name InstancedUnit
+
+var unit_name: String
 var sprite: Sprite3D
 var base_attack: int
 var base_health: int
-var position: int
+var unit_position: int
 
 var pre_battle: Array = []
 var on_attack: Array = []
@@ -19,10 +21,10 @@ var curr_attack: int
 var curr_health: int
 
 
-func _init(unit: String, pos: int):
+func configure(unit: String, pos: int):
 	var unit_data = UnitsData.Database[unit]
-	name = unit
-	position = pos
+	unit_name = unit
+	unit_position = pos
 	
 	base_attack = unit_data["Attack"]
 	base_health = unit_data["Health"]
@@ -30,12 +32,7 @@ func _init(unit: String, pos: int):
 	pre_battle = unit_data["PreBattle"] if unit_data.has("PreBattle") else []
 	on_attack = unit_data["OnAttack"] if unit_data.has("OnAttack") else []
 	
-	sprite = Sprite3D.new()
-	sprite.shaded = true
-	sprite.double_sided = true
-	sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
-	sprite.texture = load(unit_data["Sprite"])
-	sprite.scale = Vector3(0.2, 0.2, 0.2)
+	self.texture = load(unit_data["Sprite"])
 	reset()
 
 

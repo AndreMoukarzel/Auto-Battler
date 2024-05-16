@@ -51,8 +51,8 @@ func battle_step():
 	if active_units.is_empty(): # Turn of column ended
 		return
 	
-	var unit1: InstancedUnit = active_units[0]
-	var unit2: InstancedUnit = active_units[1]
+	var unit1 = active_units[0]
+	var unit2 = active_units[1]
 	
 	if unit1 != null and unit2 != null:
 		for effect in unit1.on_attack:
@@ -67,20 +67,20 @@ func battle_step():
 			$EffectHandler.execute(unit2, effect, $Army2, $Army1)
 	
 	if unit1 != null and unit1.is_dead():
-		$Army1.kill_unit(unit1.position)
+		$Army1.kill_unit(unit1.unit_position)
 	if unit2 != null and unit2.is_dead():
-		$Army2.kill_unit(unit2.position)
+		$Army2.kill_unit(unit2.unit_position)
 	
 	# Direct hits to player
 	if unit1 != null and unit2 == null:
 		for effect in unit1.on_attack:
 			$EffectHandler.execute(unit1, effect, $Army1, $Army2)
-		$Army1.kill_unit(unit1.position)
+		$Army1.kill_unit(unit1.unit_position)
 	elif unit1 == null and unit2 != null:
 		for effect in unit2.on_attack:
 			$EffectHandler.execute(unit2, effect, $Army2, $Army1)
 		%PlayerHealth.text = str(int(%PlayerHealth.text) - unit2.curr_attack)
-		$Army2.kill_unit(unit2.position)
+		$Army2.kill_unit(unit2.unit_position)
 
 
 func post_battle_step():

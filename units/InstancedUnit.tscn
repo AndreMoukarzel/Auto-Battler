@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw5jqufxm84jl"]
+
+[ext_resource type="Script" path="res://units/InstancedUnit.gd" id="1_feer0"]
+
+[node name="InstancedUnit" type="Sprite3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+shaded = true
+script = ExtResource("1_feer0")
