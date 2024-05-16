@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://corp2mgblapx2"]
+[gd_scene load_steps=5 format=3 uid="uid://corp2mgblapx2"]
 
 [ext_resource type="Script" path="res://combat/Army.gd" id="1_dtubs"]
+[ext_resource type="Shader" uid="uid://urm2kb3iy4wq" path="res://combat/HighlightShader.tres" id="2_xvcnp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0moh"]
+render_priority = 0
+shader = ExtResource("2_xvcnp")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ge4df"]
+height = 0.1
 
 [node name="Army" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -23,3 +31,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.75)
 
 [node name="Position5" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0.75)
+
+[node name="Highlight" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("ShaderMaterial_k0moh")
+mesh = SubResource("CylinderMesh_ge4df")

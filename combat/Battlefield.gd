@@ -36,12 +36,21 @@ func pre_battle_step():
 	var i: int = 0
 	for unit in active_units:
 		if unit != null:
+			if i == 0:
+				$Army1.highlight_position(unit.unit_position)
+			else:
+				$Army2.highlight_position(unit.unit_position)
 			for effect in unit.pre_battle:
 				if i == 0:
 					$EffectHandler.execute(unit, effect, $Army1, $Army2)
 				else:
 					$EffectHandler.execute(unit, effect, $Army2, $Army1)
 			$PriorityDealer.done(unit)
+		else:
+			if i == 0:
+				$Army1.hide_highlight()
+			else:
+				$Army2.hide_highlight()
 		i += 1
 
 
@@ -55,6 +64,8 @@ func battle_step():
 	var unit2 = active_units[1]
 	
 	if unit1 != null and unit2 != null:
+		$Army1.highlight_position(unit1.unit_position)
+		$Army2.highlight_position(unit2.unit_position)
 		for effect in unit1.on_attack:
 			$EffectHandler.execute(unit1, effect, $Army1, $Army2)
 		for effect in unit2.on_attack:
@@ -73,10 +84,12 @@ func battle_step():
 	
 	# Direct hits to player
 	if unit1 != null and unit2 == null:
+		$Army1.highlight_position(unit1.unit_position)
 		for effect in unit1.on_attack:
 			$EffectHandler.execute(unit1, effect, $Army1, $Army2)
 		$Army1.kill_unit(unit1.unit_position)
 	elif unit1 == null and unit2 != null:
+		$Army2.highlight_position(unit2.unit_position)
 		for effect in unit2.on_attack:
 			$EffectHandler.execute(unit2, effect, $Army2, $Army1)
 		%PlayerHealth.text = str(int(%PlayerHealth.text) - unit2.curr_attack)
@@ -92,12 +105,21 @@ func post_battle_step():
 	var i: int = 0
 	for unit in active_units:
 		if unit != null:
+			if i == 0:
+				$Army1.highlight_position(unit.unit_position)
+			else:
+				$Army2.highlight_position(unit.unit_position)
 			for effect in unit.post_battle:
 				if i == 0:
 					$EffectHandler.execute(unit, effect, $Army1, $Army2)
 				else:
 					$EffectHandler.execute(unit, effect, $Army2, $Army1)
 			$PriorityDealer.done(unit)
+		else:
+			if i == 0:
+				$Army1.hide_highlight()
+			else:
+				$Army2.hide_highlight()
 		i += 1
 
 

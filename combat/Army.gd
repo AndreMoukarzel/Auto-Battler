@@ -40,3 +40,13 @@ func get_unit(pos: int):
 func kill_unit(pos: int):
 	units[pos].die()
 	units[pos] = null
+	hide_highlight()
+
+
+func highlight_position(pos: int):
+	$Highlight.position = get_node("Position" + str(pos)).position
+	$Highlight.show()
+
+
+func hide_highlight():
+	$Highlight.hide()
