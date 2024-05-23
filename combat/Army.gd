@@ -19,7 +19,7 @@ func add_unit(unit_name: String, pos: int):
 		return
 	
 	var new_unit = InstacedUnit.instantiate()
-	new_unit.configure(unit_name, pos)
+	new_unit.configure(unit_name, pos, self)
 	base_units[pos] = new_unit
 	get_node("Position" + str(pos)).add_child(new_unit)
 	
@@ -31,6 +31,8 @@ func reset_troops():
 		if base_units[pos] != null:
 			base_units[pos].reset()
 		units[pos] = base_units[pos]
+		if units[pos] != null: # Updates reference to army
+			units[pos].army = self
 
 
 func get_unit(pos: int):

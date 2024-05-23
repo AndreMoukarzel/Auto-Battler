@@ -1,11 +1,14 @@
 extends Node
 
 
+
 func execute(unit, effect, ally_army, enemy_army):
 	var effect_type: String = effect[0]
 	
 	if effect_type.to_lower() == "buff":
 		buff(unit, effect, ally_army, enemy_army)
+	else:
+		push_warning("UNKOWN EFFECT TYPE " + effect_type)
 
 
 func buff(unit, effect, ally_army, enemy_army):
@@ -19,6 +22,8 @@ func buff(unit, effect, ally_army, enemy_army):
 		if target_pos != -1 and ally_army.units[target_pos] != null:
 			var target_unit = ally_army.units[target_pos]
 			modify_attribute(target_unit, attr_effect)
+	else:
+		push_warning("UNKOWN TARGET TYPE " + target_team)
 
 
 func get_relative_ally_position(base_pos: int, direction: String) -> int:
@@ -28,6 +33,8 @@ func get_relative_ally_position(base_pos: int, direction: String) -> int:
 		return -1
 	elif direction.to_lower() == "self":
 		return base_pos
+	else:
+		push_warning("UNKOWN ALLY POSITION " + direction)
 	return -1
 
 
