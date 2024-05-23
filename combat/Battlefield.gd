@@ -18,9 +18,9 @@ func reset():
 		for unit in army.units:
 			if unit != null:
 				if len(unit.on_hit) > 0:
-					unit.was_damaged.connect(insert_on_front.bind(unit, unit.on_hit))
+					unit.was_damaged.connect(insert_on_front_effects.bind(unit, unit.on_hit))
 				if len(unit.on_death) > 0:
-					unit.died.connect(insert_on_front.bind(unit, unit.on_death))
+					unit.died.connect(insert_on_front_effects.bind(unit, unit.on_death))
 
 
 func get_other_army(army):
@@ -28,6 +28,11 @@ func get_other_army(army):
 	if army == $Army1:
 		return $Army2
 	return $Army1
+
+
+func insert_on_front_effects(actor, effects_list: Array):
+	for effect in effects_list:
+		action_priority.push_front([[actor, effect]])
 
 
 func insert_on_front(actor, action):

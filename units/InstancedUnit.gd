@@ -25,6 +25,7 @@ var curr_attack: int :
 		return curr_attack
 	set(value):
 		curr_attack = value
+		$Health/AnimationPlayer.stop(true)
 		$Attack/AnimationPlayer.play("bounce")
 		$Attack.text = str(curr_attack)
 var curr_health: int :
@@ -32,6 +33,7 @@ var curr_health: int :
 		return curr_health
 	set(value):
 		curr_health = max(0, value)
+		$Health/AnimationPlayer.stop(true)
 		$Health/AnimationPlayer.play("bounce")
 		$Health.text = str(curr_health)
 

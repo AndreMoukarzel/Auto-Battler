@@ -9,7 +9,7 @@ class_name UnitsData
 ##	- PostBattle
 ##	- OnDeath
 ## Existing actions can be the following types:
-##	- Damage: Damages its target. Format is ["Damage", Attack Power, [Target Army, Positions affected, Frequency]]
+##	- Damage: Damages its target. Format is ["Damage", Attack Power, [Target Army, Positions affected], Frequency]
 ##	- Buff: Modifies the attribute of an unit. Format is ["Buff", [Attribute affected, "Sum"/"Mult", Value], [Target Army, Positions affected]]
 
 const Database = {
@@ -17,7 +17,7 @@ const Database = {
 		"Sprite": "res://units/sprites/1.png",
 		"Attack": 3,
 		"Health": 1,
-		"PreBattle": [["Damage", 1, ["Enemy", "Front", 2]]]
+		"PreBattle": [["Damage", 1, ["Enemy", "Front"], 2]]
 	},
 	"Bullwark": {
 		"Sprite": "res://units/sprites/3.png",
