@@ -3,7 +3,6 @@ extends Node
 
 
 func execute(unit, effect, ally_army, enemy_army):
-	print(effect)
 	var effect_type: String = effect[0]
 	
 	if effect_type.to_lower() == "buff":
@@ -51,7 +50,9 @@ func get_relative_ally_position(base_pos: int, direction: String) -> int:
 	if direction.to_lower() == "front":
 		if base_pos % 2 == 1: # Unit is at the back
 			return base_pos - 1
-		return -1
+	elif direction.to_lower() == "back":
+		if base_pos % 2 == 0: # Unit is at the front
+			return base_pos + 1 
 	elif direction.to_lower() == "self":
 		return base_pos
 	else:
