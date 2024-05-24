@@ -165,10 +165,10 @@ func battle_step():
 func _on_go_pressed():
 	if curr_state == STATES.PreBattle:
 		effect_step("pre_battle")
-		execute_all_effects()
 	elif curr_state == STATES.Battle:
 		battle_step()
 	elif curr_state == STATES.PostBattle:
 		effect_step("post_battle")
 	elif curr_state == STATES.End:
 		emit_signal("battle_done")
+	execute_all_effects()
