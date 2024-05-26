@@ -38,11 +38,11 @@ var curr_health: int :
 		$Health.text = str(curr_health)
 
 
-func configure(unit: String, pos: int, owner_army: Node3D):
+func configure(unit: String, pos: int=-1, owner_army: Node3D=null):
 	var unit_data = UnitsData.Database[unit]
 	unit_name = unit
 	unit_position = pos
-	army = army
+	army = owner_army
 	
 	base_attack = unit_data["Attack"]
 	base_health = unit_data["Health"]
@@ -55,6 +55,10 @@ func configure(unit: String, pos: int, owner_army: Node3D):
 	
 	$Sprite3D.texture = load(unit_data["Sprite"])
 	reset()
+
+
+func get_texture():
+	return $Sprite3D.texture
 
 
 func add_bonus_attack(value: int):
