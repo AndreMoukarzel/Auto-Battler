@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bdfet3llmdvi8"]
 
-[ext_resource type="Script" path="res://test_scene.gd" id="1_ptu7y"]
-[ext_resource type="PackedScene" uid="uid://dprmfccfu4ywe" path="res://combat/Battlefield.tscn" id="1_qw52c"]
+[ext_resource type="Script" path="res://test_battle.gd" id="1_agkom"]
+[ext_resource type="PackedScene" uid="uid://dprmfccfu4ywe" path="res://combat/Battlefield.tscn" id="2_x4xas"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_86upm"]
 size = Vector3(20, 1, 60)
@@ -10,22 +10,22 @@ size = Vector3(20, 1, 60)
 sky_top_color = Color(0.101356, 0.45492, 0.781121, 1)
 sky_horizon_color = Color(0.715883, 0.636485, 0.601926, 1)
 
-[sub_resource type="Sky" id="Sky_dggux"]
+[sub_resource type="Sky" id="Sky_y1imi"]
 sky_material = SubResource("ProceduralSkyMaterial_1kyek")
 
 [sub_resource type="Environment" id="Environment_okcgk"]
 background_mode = 2
-sky = SubResource("Sky_dggux")
+sky = SubResource("Sky_y1imi")
 
-[node name="TestScene" type="Node3D"]
-script = ExtResource("1_ptu7y")
+[node name="TestBattle" type="Node3D"]
+script = ExtResource("1_agkom")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.994194, -0.0238203, 0.10493, 0, 0.975188, 0.221378, -0.1076, -0.220093, 0.969526, 0.939174, 2.88064, 8.14616)
 
-[node name="Battlefield" parent="." instance=ExtResource("1_qw52c")]
+[node name="Battlefield" parent="." instance=ExtResource("2_x4xas")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_86upm")
 

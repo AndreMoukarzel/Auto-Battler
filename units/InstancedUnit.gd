@@ -38,7 +38,7 @@ var curr_health: int :
 		$Health.text = str(curr_health)
 
 
-func configure(unit: String, pos: int, army: Node3D):
+func configure(unit: String, pos: int, owner_army: Node3D):
 	var unit_data = UnitsData.Database[unit]
 	unit_name = unit
 	unit_position = pos
