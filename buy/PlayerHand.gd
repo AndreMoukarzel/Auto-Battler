@@ -26,7 +26,7 @@ func _input(event):
 				holding_unit = PlayerTroops.units[selected_pos]
 				PlayerTroops.remove_unit(selected_pos)
 		else: # Mouse released
-			if selected_pos != -1:
+			if selected_pos != -1 and holding_unit != null:
 				if PlayerTroops.units[selected_pos] == null: # Placing unit in empty spot
 					PlayerTroops.add_unit(holding_unit, selected_pos)
 				else: # Swaping existing units
