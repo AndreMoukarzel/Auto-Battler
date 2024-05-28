@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bilpjgchhx7ns"]
+[gd_scene load_steps=13 format=3 uid="uid://bilpjgchhx7ns"]
 
 [ext_resource type="Script" path="res://test_unit_selection.gd" id="1_4d55q"]
 [ext_resource type="Script" path="res://buy/PlayerTroops.gd" id="1_sy4wx"]
 [ext_resource type="Texture2D" uid="uid://w4q3dy5ix0wh" path="res://units/sprites/1.png" id="3_ohs1y"]
 [ext_resource type="Script" path="res://buy/PlayerHand.gd" id="3_oi34u"]
+[ext_resource type="Script" path="res://buy/Store.gd" id="5_y11dr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ds0jy"]
 size = Vector3(20, 1, 60)
@@ -148,3 +149,25 @@ offset_right = 150.0
 offset_bottom = 150.0
 texture = ExtResource("3_ohs1y")
 expand_mode = 1
+
+[node name="Store" type="Control" parent="PlayerHand"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("5_y11dr")
+
+[node name="AvailableUnits" type="HBoxContainer" parent="PlayerHand/Store"]
+layout_mode = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/separation = 20

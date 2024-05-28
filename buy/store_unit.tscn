@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnmyj5ucx56gu"]
+
+[ext_resource type="Texture2D" uid="uid://dxsvdo0i1qi0a" path="res://units/sprites/2.png" id="1_qnepg"]
+[ext_resource type="Script" path="res://buy/store_unit.gd" id="2_2llpg"]
+
+[node name="StoreUnit" type="TextureRect"]
+custom_minimum_size = Vector2(150, 150)
+texture = ExtResource("1_qnepg")
+expand_mode = 1
+script = ExtResource("2_2llpg")
+
+[node name="Attack" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Health" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
