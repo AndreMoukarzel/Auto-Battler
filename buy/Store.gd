@@ -4,7 +4,7 @@ extends Control
 var InstacedUnit: PackedScene = preload("res://units/InstancedUnit.tscn")
 var StoreUnit: PackedScene = preload("res://buy/store_unit.tscn")
 
-var unit_names = UnitsData.Database.keys()
+var unit_names: Array = UnitsData.Database.keys()
 
 
 func _ready():
@@ -22,3 +22,16 @@ func refill():
 		SUnit.unit = Unit
 		
 		$AvailableUnits.add_child(SUnit)
+		
+		SUnit.pressed.connect(select.bind(SUnit))
+		SUnit.released.connect(deselect.bind(SUnit))
+
+
+func select(SUnit):
+	SUnit.disable()
+	get_parent().get_from_store(SUnit)
+
+
+func deselect(SUnit):
+	SUnit.disable(false)
+	get_parent().release_from_store(SUnit)
