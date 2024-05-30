@@ -1,10 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bilpjgchhx7ns"]
+[gd_scene load_steps=17 format=3 uid="uid://bilpjgchhx7ns"]
 
-[ext_resource type="Script" path="res://test_unit_selection.gd" id="1_4d55q"]
-[ext_resource type="Script" path="res://buy/PlayerTroops.gd" id="1_sy4wx"]
-[ext_resource type="Texture2D" uid="uid://w4q3dy5ix0wh" path="res://units/sprites/1.png" id="3_ohs1y"]
-[ext_resource type="Script" path="res://buy/PlayerHand.gd" id="3_oi34u"]
-[ext_resource type="Script" path="res://buy/Store.gd" id="5_y11dr"]
+[ext_resource type="Script" path="res://buy/buy_phase.gd" id="1_wtqsm"]
+[ext_resource type="Script" path="res://buy/PlayerTroops.gd" id="2_bt5d1"]
+[ext_resource type="Script" path="res://buy/PlayerHand.gd" id="3_mm21w"]
+[ext_resource type="Texture2D" uid="uid://w4q3dy5ix0wh" path="res://units/sprites/1.png" id="4_ryro6"]
+[ext_resource type="Script" path="res://buy/Store.gd" id="5_w651e"]
+[ext_resource type="Texture2D" uid="uid://4bdhk5biaea3" path="res://buy/ui-sprites/board.png" id="6_6jngj"]
+[ext_resource type="Texture2D" uid="uid://bpwmj2aowx3th" path="res://buy/ui-sprites/coin.png" id="7_sj7wa"]
+[ext_resource type="Texture2D" uid="uid://cist1pwe6sv88" path="res://buy/ui-sprites/heart.png" id="8_b8aug"]
+[ext_resource type="Texture2D" uid="uid://dbslb62ffpya1" path="res://buy/ui-sprites/shield.png" id="9_xy7fk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ds0jy"]
 size = Vector3(20, 1, 60)
@@ -29,8 +33,8 @@ size = Vector3(1, 0.235, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_e562w"]
 size = Vector3(1.26, 1.055, 1.14)
 
-[node name="TestUnitSelection" type="Node3D"]
-script = ExtResource("1_4d55q")
+[node name="BuyPhase" type="Node3D"]
+script = ExtResource("1_wtqsm")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -47,11 +51,10 @@ light_energy = 1.175
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.994338, 0.106264, 0, -0.106264, 0.994338, 0.717518, 0.93172, 3.98719)
-metadata/_edit_lock_ = true
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0.7, 0.5, 4.5)
 
 [node name="PlayerTroops" type="Node3D" parent="."]
-script = ExtResource("1_sy4wx")
+script = ExtResource("2_bt5d1")
 
 [node name="Position0" type="Node3D" parent="PlayerTroops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84969, 0, 0)
@@ -82,7 +85,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_e562w")
 
 [node name="Position2" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.191028, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0396049, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position2"]
@@ -124,7 +127,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_e562w")
 
 [node name="Position5" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.03728, 0, -1.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42542, 0, -1.8)
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position5"]
@@ -145,7 +148,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("3_oi34u")
+script = ExtResource("3_mm21w")
 metadata/_edit_lock_ = true
 
 [node name="Holding" type="TextureRect" parent="PlayerHand"]
@@ -155,7 +158,7 @@ layout_mode = 0
 offset_right = 150.0
 offset_bottom = 150.0
 mouse_filter = 2
-texture = ExtResource("3_ohs1y")
+texture = ExtResource("4_ryro6")
 expand_mode = 1
 
 [node name="Store" type="Control" parent="PlayerHand"]
@@ -166,10 +169,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_right = -10.0
-offset_bottom = -10.0
+offset_bottom = -130.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("5_y11dr")
+script = ExtResource("5_w651e")
 
 [node name="AvailableUnits" type="HBoxContainer" parent="PlayerHand/Store"]
 layout_mode = 2
@@ -179,3 +182,123 @@ offset_top = -40.0
 offset_right = 40.0
 grow_vertical = 0
 theme_override_constants/separation = 20
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Info" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 330.0
+offset_bottom = 110.0
+theme_override_constants/separation = 20
+
+[node name="Money" type="TextureRect" parent="HUD/Info"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture = ExtResource("6_6jngj")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="HUD/Info/Money"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
+grow_vertical = 2
+texture = ExtResource("7_sj7wa")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="HUD/Info/Money"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.675
+offset_top = -31.5
+offset_right = -24.675
+offset_bottom = 31.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health" type="TextureRect" parent="HUD/Info"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture = ExtResource("6_6jngj")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="HUD/Info/Health"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
+grow_vertical = 2
+texture = ExtResource("8_b8aug")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="HUD/Info/Health"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.675
+offset_top = -31.5
+offset_right = -24.675
+offset_bottom = 31.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reroll" type="TextureButton" parent="HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.99
+anchor_right = 0.01
+anchor_bottom = 0.99
+offset_top = -100.0
+offset_right = 100.0
+grow_vertical = 0
+texture_normal = ExtResource("9_xy7fk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Icon" type="TextureRect" parent="HUD/Reroll"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
+grow_vertical = 2
+texture = ExtResource("7_sj7wa")
+expand_mode = 1
+
+[connection signal="button_up" from="HUD/Reroll" to="." method="_on_reroll_button_up"]

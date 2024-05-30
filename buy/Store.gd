@@ -27,6 +27,11 @@ func refill():
 		SUnit.released.connect(deselect.bind(SUnit))
 
 
+func clear():
+	for child in $AvailableUnits.get_children():
+		child.queue_free()
+
+
 func select(SUnit):
 	SUnit.disable()
 	get_parent().get_from_store(SUnit)
