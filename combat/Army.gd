@@ -3,13 +3,11 @@ extends Node3D
 signal position_already_taken(pos: int)
 signal unit_added
 
-var InstacedUnit: PackedScene = load("res://units/InstancedUnit.tscn")
-
 var base_units: Array = [null, null, null, null, null ,null]
 var units: Array = [null, null, null, null, null ,null] # We have this array to have the liberty to delete references to units
 
 
-func add_unit(unit_name: String, pos: int):
+func add_unit(unit, pos: int):
 	if pos >= len(base_units):
 		push_error("Invalid unit position")
 		return
@@ -18,10 +16,10 @@ func add_unit(unit_name: String, pos: int):
 		emit_signal("position_already_taken", pos)
 		return
 	
-	var new_unit = InstacedUnit.instantiate()
-	new_unit.configure(unit_name, pos, self)
-	base_units[pos] = new_unit
-	get_node("Position" + str(pos)).add_child(new_unit)
+	unit.unit_position = pos
+	unit.army = self
+	base_units[pos] = unit
+	get_node("Position" + str(pos)).add_child(unit)
 	
 	emit_signal("unit_added")
 

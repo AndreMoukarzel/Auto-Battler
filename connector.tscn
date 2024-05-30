@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk0c44ovx1q1n"]
+
+[ext_resource type="Script" path="res://connector.gd" id="1_7h6dw"]
+[ext_resource type="PackedScene" uid="uid://bilpjgchhx7ns" path="res://buy/buy_phase.tscn" id="1_diixu"]
+[ext_resource type="PackedScene" uid="uid://bdfet3llmdvi8" path="res://combat/battle.tscn" id="2_h1hjm"]
+
+[node name="Connector" type="Node3D"]
+script = ExtResource("1_7h6dw")
+
+[node name="BuyPhase" parent="." instance=ExtResource("1_diixu")]
+
+[node name="Battle" parent="." instance=ExtResource("2_h1hjm")]
+visible = false
+
+[connection signal="to_battle" from="BuyPhase" to="." method="_on_buy_phase_to_battle"]

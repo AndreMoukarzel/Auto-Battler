@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bdfet3llmdvi8"]
 
-[ext_resource type="Script" path="res://test_battle.gd" id="1_agkom"]
-[ext_resource type="PackedScene" uid="uid://dprmfccfu4ywe" path="res://combat/Battlefield.tscn" id="2_x4xas"]
+[ext_resource type="Script" path="res://combat/battle.gd" id="1_exgs1"]
+[ext_resource type="PackedScene" uid="uid://dprmfccfu4ywe" path="res://combat/Battlefield.tscn" id="2_2lrue"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_86upm"]
 size = Vector3(20, 1, 60)
@@ -17,13 +17,13 @@ sky_material = SubResource("ProceduralSkyMaterial_1kyek")
 background_mode = 2
 sky = SubResource("Sky_y1imi")
 
-[node name="TestBattle" type="Node3D"]
-script = ExtResource("1_agkom")
+[node name="Battle" type="Node3D"]
+script = ExtResource("1_exgs1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.994194, -0.0238203, 0.10493, 0, 0.975188, 0.221378, -0.1076, -0.220093, 0.969526, 0.939174, 2.88064, 8.14616)
 
-[node name="Battlefield" parent="." instance=ExtResource("2_x4xas")]
+[node name="Battlefield" parent="." instance=ExtResource("2_2lrue")]
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -38,15 +38,16 @@ light_color = Color(0.959232, 0.817427, 0.594911, 1)
 light_energy = 1.175
 shadow_enabled = true
 
-[node name="UI" type="Control" parent="."]
+[node name="BattleUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Buttons" type="HBoxContainer" parent="UI"]
+[node name="Buttons" type="HBoxContainer" parent="BattleUI"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -60,26 +61,14 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 5
 
-[node name="Go" type="Button" parent="UI/Buttons"]
-layout_mode = 2
-text = "Next Turn"
-
-[node name="Reset" type="Button" parent="UI/Buttons"]
+[node name="Reset" type="Button" parent="BattleUI/Buttons"]
 layout_mode = 2
 disabled = true
 text = "Reset"
 
-[node name="PlayerHealth" type="Label" parent="UI"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
-grow_vertical = 0
-text = "20"
+[node name="BattleTimer" type="Timer" parent="."]
+wait_time = 0.6
 
 [connection signal="battle_done" from="Battlefield" to="." method="_on_battlefield_battle_done"]
-[connection signal="pressed" from="UI/Buttons/Go" to="Battlefield" method="_on_go_pressed"]
-[connection signal="pressed" from="UI/Buttons/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="BattleUI/Buttons/Reset" to="." method="_on_reset_pressed"]
+[connection signal="timeout" from="BattleTimer" to="." method="_on_battle_timer_timeout"]

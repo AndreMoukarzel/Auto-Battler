@@ -158,11 +158,12 @@ func battle_step():
 		$Army2.highlight_position(unit2.unit_position)
 		for effect in unit2.on_attack:
 			$EffectHandler.execute(unit2, effect, $Army2, $Army1)
-		%PlayerHealth.text = str(int(%PlayerHealth.text) - unit2.curr_attack)
+		# TODO: Direct damage to player
+		#%PlayerHealth.text = str(int(%PlayerHealth.text) - unit2.curr_attack)
 		$Army2.kill_unit(unit2.unit_position)
 
 
-func _on_go_pressed():
+func progress_battle():
 	if curr_state == STATES.PreBattle:
 		effect_step("pre_battle")
 	elif curr_state == STATES.Battle:
