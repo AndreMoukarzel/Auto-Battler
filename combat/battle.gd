@@ -1,13 +1,11 @@
 extends Node3D
 
 
+signal battle_done
+
 
 func _on_battlefield_battle_done():
-	$BattleUI/Buttons/Reset.disabled = false
-
-
-func _on_reset_pressed():
-	$BattleUI/Buttons/Reset.disabled = true
+	emit_signal("battle_done")
 
 
 func setup_armies(player_units: Array, enemy_units: Array):

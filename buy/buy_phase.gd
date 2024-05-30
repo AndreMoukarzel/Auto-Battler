@@ -11,12 +11,10 @@ var money: int = 10:
 		$HUD/Info/Money/Label.text = str(money)
 
 
-func _on_reroll_button_up():
-	if money >= 3:
-		money -= 3
-		$PlayerHand/Store.clear()
-		$PlayerHand/Store.refill()
-
+func reset():
+	money = 10
+	$PlayerHand/Store.clear()
+	$PlayerHand/Store.refill()
 
 ## Since duplicate() does not copy the script's variable values, we must copy
 ## those values manually.
@@ -44,6 +42,13 @@ func get_troops():
 		else:
 			units_copy.append(null)
 	return units_copy
+
+
+func _on_reroll_button_up():
+	if money >= 3:
+		money -= 3
+		$PlayerHand/Store.clear()
+		$PlayerHand/Store.refill()
 
 
 func _on_to_battle_button_up():

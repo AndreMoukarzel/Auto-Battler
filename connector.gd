@@ -15,6 +15,20 @@ func _on_buy_phase_to_battle():
 	$BuyPhase/Camera3D.current = false
 	$Battle/Camera3D.current = true
 	$Battle.setup_armies(player_units, enemy_units)
+	$BattleUI.show()
+
+
+func _on_battle_to_buy_phase():
+	$BattleUI.hide()
+	$Battle.hide()
+	
+	$Battle/Camera3D.current = false
+	$BuyPhase/Camera3D.current = true
+	
+	$BuyPhase.reset()
+	$BuyPhase.show()
+	$BuyPhase/HUD.show()
+	$BuyPhase/PlayerHand.show()
 
 
 func get_enemy_units():
@@ -28,3 +42,11 @@ func get_enemy_units():
 		else:
 			instanced_units.append(null)
 	return instanced_units
+
+
+func _on_battle_battle_done():
+	$BattleUI/EndBattle.disabled = false
+
+
+func _on_end_battle_button_up():
+	_on_battle_to_buy_phase()
