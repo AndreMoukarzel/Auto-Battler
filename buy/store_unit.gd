@@ -2,6 +2,7 @@ extends TextureRect
 
 signal pressed
 signal released
+signal locked
 
 var unit:
 	get:
@@ -15,10 +16,13 @@ var unit:
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.pressed:
-			emit_signal("pressed")
-		else:
-			emit_signal("released")
+		if event.button_index == 1: # Left mouse button
+			if event.pressed:
+				emit_signal("pressed")
+			else:
+				emit_signal("released")
+		elif event.button_index == 2 and event.pressed: # Right mouse button
+			emit_signal("locked")
 
 
 func disable(boolean: bool=true):
@@ -30,3 +34,10 @@ func disable(boolean: bool=true):
 		self.modulate = Color(1., 1., 1., 1.)
 		$Attack.show()
 		$Health.show()
+
+
+func lock(boolean: bool=true):
+	if boolean:
+		$Lock.show()
+	else:
+		$Lock.hide()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnmyj5ucx56gu"]
+[gd_scene load_steps=4 format=3 uid="uid://bnmyj5ucx56gu"]
 
 [ext_resource type="Texture2D" uid="uid://dxsvdo0i1qi0a" path="res://units/sprites/2.png" id="1_qnepg"]
 [ext_resource type="Script" path="res://buy/store_unit.gd" id="2_2llpg"]
+[ext_resource type="Texture2D" uid="uid://dqxxy3wqvqo1l" path="res://buy/ui-sprites/lock.png" id="3_tkslf"]
 
 [node name="StoreUnit" type="TextureRect"]
 custom_minimum_size = Vector2(120, 120)
@@ -39,5 +40,18 @@ theme_override_font_sizes/font_size = 30
 text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Lock" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(40, 60)
+layout_mode = 2
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 80.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tkslf")
+expand_mode = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
