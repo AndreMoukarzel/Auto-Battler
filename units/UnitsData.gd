@@ -17,24 +17,24 @@ const Database = {
 		"Sprite": "res://units/sprites/1.png",
 		"Attack": 3,
 		"Health": 1,
-		"PreBattle": [["Damage", 1, ["Enemy", "Front"], 2]]
+		"PreBattle": [["Damage", [1, 1, 1], ["Enemy", "Front"], [2, 3, 4]]]
 	},
 	"Bullwark": {
 		"Sprite": "res://units/sprites/3.png",
 		"Attack": 1,
 		"Health": 8,
-		"OnHit": [["Buff", ["Attack", "Sum", 1], ["Ally", "Back"]]]
+		"OnHit": [["Buff", ["Attack", "Sum", [1, 1, 1]], ["Ally", "Back"]]]
 	},
 	"Berserker": {
 		"Sprite": "res://units/sprites/4.png",
 		"Attack": 1,
 		"Health": 3,
-		"OnAttack": [["Buff", ["Attack", "Mult", 2.0], ["Ally", "Self"]]]
+		"OnAttack": [["Buff", ["Attack", "Mult", [2.0, 2.5, 3.0]], ["Ally", "Self"]]]
 	},
 	"Runic Master": {
 		"Sprite": "res://units/sprites/2.png",
 		"Attack": 1,
 		"Health": 1,
-		"PreBattle": [["Buff", ["Attack", "Sum", 2], ["Ally", "Front"]]]
+		"PreBattle": [["Buff", ["Attack", "Sum", [2, 4, 6]], ["Ally", "Front"]]]
 	}
 }

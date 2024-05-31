@@ -26,6 +26,8 @@ func copy_unit_info(from_unit, to_unit):
 	to_unit.bonus_attack = from_unit.bonus_attack
 	to_unit.bonus_health = from_unit.bonus_health
 	
+	to_unit.level = from_unit.level
+	
 	to_unit.pre_battle = from_unit.pre_battle
 	to_unit.on_attack = from_unit.on_attack
 	to_unit.on_hit = from_unit.on_hit
