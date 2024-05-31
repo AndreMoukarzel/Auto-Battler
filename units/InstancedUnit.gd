@@ -103,6 +103,7 @@ func die():
 	$Sprite3D/AnimationPlayer.play("die")
 	$Health.hide()
 	$Attack.hide()
+	$Level.hide()
 	emit_signal("died")
 
 
@@ -120,3 +121,4 @@ func reset():
 	$Sprite3D/AnimationPlayer.play("RESET")
 	$Health.show()
 	$Attack.show()
+	$Level.show()
