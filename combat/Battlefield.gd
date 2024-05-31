@@ -21,6 +21,7 @@ func reset():
 					unit.was_damaged.connect(insert_on_front_effects.bind(unit, unit.on_hit))
 				if len(unit.on_death) > 0:
 					unit.died.connect(insert_on_front_effects.bind(unit, unit.on_death))
+				unit.was_damaged.connect(check_death.bind(unit))
 
 
 func get_other_army(army):
@@ -48,6 +49,11 @@ func insert_simultaneous(actor1, action1, actor2, action2):
 		[actor1, action1],
 		[actor2, action2]
 	])
+
+
+func check_death(unit):
+	if unit.curr_health == 0:
+		unit.army.kill_unit(unit.unit_position)
 
 
 func execute_all_effects():
@@ -142,11 +148,6 @@ func battle_step():
 			$EffectHandler.execute(unit1, effect, $Army1, $Army2)
 		for effect in unit2.on_hit:
 			$EffectHandler.execute(unit2, effect, $Army2, $Army1)
-	
-	if unit1 != null and unit1.is_dead():
-		$Army1.kill_unit(unit1.unit_position)
-	if unit2 != null and unit2.is_dead():
-		$Army2.kill_unit(unit2.unit_position)
 	
 	# Direct hits to player
 	if unit1 != null and unit2 == null:
