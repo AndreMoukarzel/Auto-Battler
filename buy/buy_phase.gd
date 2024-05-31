@@ -13,7 +13,7 @@ var money: int = 10:
 
 func reset():
 	money = 10
-	$PlayerHand/Store.unlock_all()
+	$PlayerHand/Store.clean_locked() # Cleans locked StoreUnits that were bought in the previous round
 	$PlayerHand/Store.clear()
 	$PlayerHand/Store.refill()
 

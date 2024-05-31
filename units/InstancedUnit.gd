@@ -10,6 +10,8 @@ var unit_position: int
 var army: Node3D
 var base_attack: int
 var base_health: int
+var level: int = 1
+var level_experience: int = 0
 
 var pre_battle: Array = []
 var on_attack: Array = []
@@ -59,6 +61,27 @@ func configure(unit: String, pos: int=-1, owner_army: Node3D=null):
 
 func get_texture():
 	return $Sprite3D.texture
+
+
+func add_experience():
+	if level < 3:
+		level_experience += 1
+		base_attack += 1
+		base_health += 1
+		if level_experience == 3:
+			level += 1
+			level_experience = 0
+			
+			$Level/Exp1.hide()
+			$Level/Exp2.hide()
+	
+	$Level/CurrentLevel.text = "Lvl" + str(level)
+	if level_experience > 0:
+		$Level/Exp1.show()
+	if level_experience > 1:
+		$Level/Exp2.show()
+	
+	reset()
 
 
 func add_bonus_attack(value: int):

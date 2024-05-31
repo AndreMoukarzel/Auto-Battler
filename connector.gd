@@ -22,6 +22,8 @@ func _on_battle_to_buy_phase():
 	$BattleUI.hide()
 	$Battle.hide()
 	
+	$Battle.clear_armies()
+	
 	$Battle/Camera3D.current = false
 	$BuyPhase/Camera3D.current = true
 	

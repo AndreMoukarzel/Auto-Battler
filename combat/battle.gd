@@ -20,5 +20,10 @@ func setup_armies(player_units: Array, enemy_units: Array):
 	$BattleTimer.start()
 
 
+func clear_armies():
+	$Battlefield/Army1.reset_army()
+	$Battlefield/Army2.reset_army()
+
+
 func _on_battle_timer_timeout():
 	$Battlefield.progress_battle()

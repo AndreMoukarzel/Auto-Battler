@@ -38,7 +38,16 @@ func _process(_delta):
 
 
 func sell_unit(Unit):
-	get_parent().money += 1
+	get_parent().money += Unit.level
+
+
+## Checks if unit2 can be merged into unit1
+func can_merge(unit1, unit2) -> bool:
+	if unit1.level == 3 or unit2.level == 3: # Unit already at max level
+		return false
+	if unit1.unit_name != unit2.unit_name: # They are different units. What are you thinking?
+		return false
+	return true
 
 
 func get_from_troops(unit_pos: int):
@@ -48,10 +57,14 @@ func get_from_troops(unit_pos: int):
 
 
 func place_from_troops(placing_pos: int):
-	if PlayerTroops.units[placing_pos] != null: # Swaping existing PlayerTroop units
-		var temp_unit =  PlayerTroops.units[placing_pos]
-		PlayerTroops.remove_unit(placing_pos)
-		PlayerTroops.add_unit(temp_unit, unit_origin_position)
+	if PlayerTroops.units[placing_pos] != null: # Placing unit over existing unit
+		var curr_unit = PlayerTroops.units[placing_pos]
+		if can_merge(curr_unit, holding_unit):
+			for i in range(holding_unit.level):
+				curr_unit.add_experience()
+		else: # Swaping existing PlayerTroop units
+			PlayerTroops.remove_unit(placing_pos)
+			PlayerTroops.add_unit(curr_unit, unit_origin_position)
 	PlayerTroops.add_unit(holding_unit, placing_pos)
 
 
@@ -70,7 +83,12 @@ func release_from_store(SUnit):
 		PlayerTroops.add_unit(SUnit.unit, selected_pos)
 		SUnit.queue_free()
 	else: # Placing unit over existing unit
-		sell_unit(PlayerTroops.units[selected_pos])
-		PlayerTroops.remove_unit(selected_pos)
-		PlayerTroops.add_unit(SUnit.unit, selected_pos)
+		var curr_unit = PlayerTroops.units[selected_pos]
+		if can_merge(curr_unit, SUnit.unit):
+			for i in range(SUnit.unit.level):
+				curr_unit.add_experience()
+		else:
+			sell_unit(PlayerTroops.units[selected_pos])
+			PlayerTroops.remove_unit(selected_pos)
+			PlayerTroops.add_unit(SUnit.unit, selected_pos)
 		SUnit.queue_free()

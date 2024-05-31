@@ -3,8 +3,8 @@ extends Node3D
 signal position_already_taken(pos: int)
 signal unit_added
 
-var base_units: Array = [null, null, null, null, null ,null]
-var units: Array = [null, null, null, null, null ,null] # We have this array to have the liberty to delete references to units
+var base_units: Array = [null, null, null, null, null, null]
+var units: Array = [null, null, null, null, null, null] # We have this array to have the liberty to delete references to units
 
 
 func add_unit(unit, pos: int):
@@ -31,6 +31,15 @@ func reset_troops():
 		units[pos] = base_units[pos]
 		if units[pos] != null: # Updates reference to army
 			units[pos].army = self
+
+
+func reset_army():
+	base_units = [null, null, null, null, null, null]
+	units = [null, null, null, null, null, null]
+	
+	for pos in range(len(base_units)):
+		for child in get_node("Position" + str(pos)).get_children():
+			child.queue_free()
 
 
 func get_unit(pos: int):

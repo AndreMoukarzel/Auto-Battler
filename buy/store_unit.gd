@@ -4,6 +4,7 @@ signal pressed
 signal released
 signal locked
 
+
 var unit:
 	get:
 		return unit
@@ -41,3 +42,7 @@ func lock(boolean: bool=true):
 		$Lock.show()
 	else:
 		$Lock.hide()
+
+
+func is_locked():
+	return $Lock.visible

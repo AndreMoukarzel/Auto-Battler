@@ -59,3 +59,11 @@ func unlock_all():
 	for unit in locked:
 		unit.lock(false)
 	locked = []
+
+
+func clean_locked():
+	var clean = []
+	for unit in locked:
+		if is_instance_valid(unit):
+			clean.append(unit)
+	locked = clean
