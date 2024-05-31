@@ -38,11 +38,11 @@ var curr_health: int :
 		$Health.text = str(curr_health)
 
 
-func configure(unit: String, pos: int=-1, army: Node3D=null):
+func configure(unit: String, pos: int=-1, owner_army: Node3D=null):
 	var unit_data = UnitsData.Database[unit]
 	unit_name = unit
 	unit_position = pos
-	army = army
+	army = owner_army
 	
 	base_attack = unit_data["Attack"]
 	base_health = unit_data["Health"]

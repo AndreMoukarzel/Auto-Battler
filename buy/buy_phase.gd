@@ -13,8 +13,10 @@ var money: int = 10:
 
 func reset():
 	money = 10
+	$PlayerHand/Store.unlock_all()
 	$PlayerHand/Store.clear()
 	$PlayerHand/Store.refill()
+
 
 ## Since duplicate() does not copy the script's variable values, we must copy
 ## those values manually.

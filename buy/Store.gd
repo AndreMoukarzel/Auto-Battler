@@ -53,3 +53,9 @@ func lock(SUnit):
 	else:
 		SUnit.lock(true)
 		locked.append(SUnit)
+
+
+func unlock_all():
+	for unit in locked:
+		unit.lock(false)
+	locked = []
