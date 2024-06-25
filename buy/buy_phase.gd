@@ -49,8 +49,8 @@ func get_troops():
 
 
 func _on_reroll_button_up():
-	if money >= 3:
-		money -= 3
+	if money >= 1:
+		money -= 1
 		$PlayerHand/Store.clear()
 		$PlayerHand/Store.refill()
 
