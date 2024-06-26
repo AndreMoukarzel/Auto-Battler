@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bilpjgchhx7ns"]
+[gd_scene load_steps=25 format=3 uid="uid://bilpjgchhx7ns"]
 
 [ext_resource type="Script" path="res://buy/buy_phase.gd" id="1_wtqsm"]
 [ext_resource type="ArrayMesh" uid="uid://cl1sqrnbl7kt4" path="res://buy/meshes/grass.res" id="2_15lqb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d4fudy47eviqp" path="res://buy/meshes/pedra.glb" id="3_evmex"]
 [ext_resource type="Script" path="res://buy/PlayerHand.gd" id="3_mm21w"]
 [ext_resource type="Texture2D" uid="uid://w4q3dy5ix0wh" path="res://units/sprites/1.png" id="4_ryro6"]
+[ext_resource type="PackedScene" uid="uid://cas6w4ggel57y" path="res://buy/meshes/plataforma.glb" id="5_eobh6"]
 [ext_resource type="Script" path="res://buy/Store.gd" id="5_w651e"]
 [ext_resource type="Texture2D" uid="uid://4bdhk5biaea3" path="res://buy/ui-sprites/board.png" id="6_6jngj"]
 [ext_resource type="Texture2D" uid="uid://bpwmj2aowx3th" path="res://buy/ui-sprites/coin.png" id="7_sj7wa"]
@@ -56,12 +57,6 @@ volumetric_fog_density = 0.0065
 density = 0.15
 emission = Color(0.918431, 0.909913, 0.912035, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pja18"]
-albedo_color = Color(0.658408, 0.262944, 0.23267, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tyhev"]
-size = Vector3(1, 0.235, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_e562w"]
 size = Vector3(1.26, 1.055, 1.14)
 
@@ -98,7 +93,7 @@ metadata/_edit_lock_ = true
 environment = SubResource("Environment_u0lax")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.855798, -0.261792, 0.446178, 0.106424, 0.933145, 0.343387, -0.506245, -0.246386, 0.826444, 3.28163, 2.06736, 3.85853)
+transform = Transform3D(0.802641, -0.331742, 0.495696, -0.59348, -0.361189, 0.719252, -0.0595663, -0.871487, -0.486787, 3.28163, 2.06736, 3.85853)
 light_color = Color(0.959232, 0.817427, 0.594911, 1)
 light_energy = 1.175
 shadow_enabled = true
@@ -124,12 +119,8 @@ transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 
 script = ExtResource("2_bt5d1")
 
 [node name="Position0" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03437, 0, -1.8)
+transform = Transform3D(0.962932, 0, 0.269743, 0, 1, 0, -0.269743, 0, 0.962932, -2, 0, -1.8)
 metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position0"]
-material_override = SubResource("StandardMaterial3D_pja18")
-mesh = SubResource("BoxMesh_tyhev")
 
 [node name="Area3D" type="Area3D" parent="PlayerTroops/Position0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -137,13 +128,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position0/Area3D"]
 shape = SubResource("BoxShape3D_e562w")
 
+[node name="Platform" parent="PlayerTroops/Position0" instance=ExtResource("5_eobh6")]
+transform = Transform3D(0.117532, 0, -0.537295, 0, 0.55, 0, 0.537295, 0, 0.117532, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position0"]
+transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
+light_energy = 7.873
+spot_range = 5.915
+spot_angle = 23.45
+
 [node name="Position1" type="Node3D" parent="PlayerTroops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84969, 0, 0)
 metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position1"]
-material_override = SubResource("StandardMaterial3D_pja18")
-mesh = SubResource("BoxMesh_tyhev")
 
 [node name="Area3D" type="Area3D" parent="PlayerTroops/Position1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -151,13 +147,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position1/Area3D"]
 shape = SubResource("BoxShape3D_e562w")
 
+[node name="Platform" parent="PlayerTroops/Position1" instance=ExtResource("5_eobh6")]
+transform = Transform3D(-0.108129, -0.00892448, -0.488086, -0.0263555, 0.499294, -0.00329069, 0.487456, 0.0250159, -0.108447, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position1"]
+transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
+light_energy = 7.873
+spot_range = 5.915
+spot_angle = 23.45
+
 [node name="Position2" type="Node3D" parent="PlayerTroops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.8)
 metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position2"]
-material_override = SubResource("StandardMaterial3D_pja18")
-mesh = SubResource("BoxMesh_tyhev")
 
 [node name="Area3D" type="Area3D" parent="PlayerTroops/Position2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -165,13 +166,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position2/Area3D"]
 shape = SubResource("BoxShape3D_e562w")
 
+[node name="Platform" parent="PlayerTroops/Position2" instance=ExtResource("5_eobh6")]
+transform = Transform3D(-0.543872, -0.0407692, 0.0710034, -0.0404262, 0.548487, 0.00527771, -0.0711993, 0, -0.545372, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position2"]
+transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
+light_energy = 7.873
+spot_range = 5.915
+spot_angle = 23.45
+
 [node name="Position3" type="Node3D" parent="PlayerTroops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0396049, 0, 0)
 metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position3"]
-material_override = SubResource("StandardMaterial3D_pja18")
-mesh = SubResource("BoxMesh_tyhev")
 
 [node name="Area3D" type="Area3D" parent="PlayerTroops/Position3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -179,13 +185,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position3/Area3D"]
 shape = SubResource("BoxShape3D_e562w")
 
+[node name="Platform" parent="PlayerTroops/Position3" instance=ExtResource("5_eobh6")]
+transform = Transform3D(-0.0291778, 0, -0.549225, 0.0105437, 0.549899, -0.000560139, 0.549124, -0.0105586, -0.0291724, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position3"]
+transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
+light_energy = 7.873
+spot_range = 5.915
+spot_angle = 23.45
+
 [node name="Position4" type="Node3D" parent="PlayerTroops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42542, 0, -1.8)
 metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position4"]
-material_override = SubResource("StandardMaterial3D_pja18")
-mesh = SubResource("BoxMesh_tyhev")
 
 [node name="Area3D" type="Area3D" parent="PlayerTroops/Position4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -193,19 +204,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position4/Area3D"]
 shape = SubResource("BoxShape3D_e562w")
 
+[node name="Platform" parent="PlayerTroops/Position4" instance=ExtResource("5_eobh6")]
+transform = Transform3D(-0.167557, -0.0550994, -0.52095, -0.0389684, 0.546745, -0.0452939, 0.522404, 0.0231114, -0.170469, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position4"]
+transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
+light_energy = 7.873
+spot_range = 5.915
+spot_angle = 23.45
+
 [node name="Position5" type="Node3D" parent="PlayerTroops"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.61763, 0, 0)
 metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerTroops/Position5"]
-material_override = SubResource("StandardMaterial3D_pja18")
-mesh = SubResource("BoxMesh_tyhev")
 
 [node name="Area3D" type="Area3D" parent="PlayerTroops/Position5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position5/Area3D"]
 shape = SubResource("BoxShape3D_e562w")
+
+[node name="Platform" parent="PlayerTroops/Position5" instance=ExtResource("5_eobh6")]
+transform = Transform3D(0.516075, 0, 0.190175, 0, 0.55, 0, -0.190175, 0, 0.516075, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position5"]
+transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
+light_energy = 7.873
+spot_range = 5.915
+spot_angle = 23.45
 
 [node name="PlayerHand" type="Control" parent="."]
 layout_mode = 3
