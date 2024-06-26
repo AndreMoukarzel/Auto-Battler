@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bilpjgchhx7ns"]
+[gd_scene load_steps=29 format=3 uid="uid://bilpjgchhx7ns"]
 
 [ext_resource type="Script" path="res://buy/buy_phase.gd" id="1_wtqsm"]
 [ext_resource type="ArrayMesh" uid="uid://cl1sqrnbl7kt4" path="res://buy/meshes/grass.res" id="2_15lqb"]
@@ -57,6 +57,70 @@ volumetric_fog_density = 0.0065
 density = 0.15
 emission = Color(0.918431, 0.909913, 0.912035, 1)
 
+[sub_resource type="FogMaterial" id="FogMaterial_2pmrq"]
+emission = Color(0.830335, 0.830335, 0.830335, 1)
+
+[sub_resource type="Animation" id="Animation_srhri"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.7, 1.075, 4.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.104719, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7ptrd"]
+resource_name = "to_battle"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.7, 1.075, 4.5), Vector3(0.7, 0.88, 4.5), Vector3(0.7, 0.88, 4.5), Vector3(0.7, 11.33, 4.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.104719, 0, 0), Vector3(-0.331613, 0, 0), Vector3(-0.331613, 0, 0), Vector3(-0.436332, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h47bj"]
+_data = {
+"RESET": SubResource("Animation_srhri"),
+"to_battle": SubResource("Animation_7ptrd")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_e562w"]
 size = Vector3(1.26, 1.055, 1.14)
 
@@ -112,8 +176,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.60737, -21.1957)
 size = Vector3(100, 8, 6)
 material = SubResource("FogMaterial_h53bv")
 
+[node name="TransitionFog" type="FogVolume" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941, 11.066, 1.681)
+size = Vector3(17.05, 15.25, 2)
+material = SubResource("FogMaterial_2pmrq")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0.7, 1.075, 4.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_h47bj")
+}
 
 [node name="PlayerTroops" type="Node3D" parent="."]
 script = ExtResource("2_bt5d1")

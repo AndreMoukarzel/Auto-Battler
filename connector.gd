@@ -5,17 +5,24 @@ var InstacedUnit: PackedScene = preload("res://units/InstancedUnit.tscn")
 
 
 func _on_buy_phase_to_battle():
-	var player_units = $BuyPhase.get_troops()
-	$BuyPhase.hide()
+	# Start transition animation
 	$BuyPhase/HUD.hide()
 	$BuyPhase/PlayerHand.hide()
-	var enemy_units = get_enemy_units()
+	$BuyPhase/Camera3D/AnimationPlayer.play("to_battle")
+	await $BuyPhase/Camera3D/AnimationPlayer.animation_finished
 	
+	# At the end, hides Buy scene and reveals battle
+	$BuyPhase.hide()
+	
+	var player_units = $BuyPhase.get_troops()
+	var enemy_units = get_enemy_units()
 	$Battle.show()
 	$BuyPhase/Camera3D.current = false
 	$Battle/Camera3D.current = true
 	$Battle.setup_armies(player_units, enemy_units)
 	$BattleUI.show()
+	
+	$BuyPhase/Camera3D/AnimationPlayer.play("RESET")
 
 
 func _on_battle_to_buy_phase():

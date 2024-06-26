@@ -72,6 +72,11 @@ func get_from_store(SUnit):
 	holding_unit = SUnit.unit
 
 
+func unlock_store_unit(SUnit):
+	if SUnit in $Store.locked:
+		$Store.lock(SUnit)
+
+
 func release_from_store(SUnit):
 	var selected_pos: int = PlayerTroops.get_current_pos()
 	if selected_pos == -1: # Release in dead space. Unit goes back to Store
@@ -81,6 +86,7 @@ func release_from_store(SUnit):
 	get_parent().money -= 3
 	if PlayerTroops.units[selected_pos] == null: # Placing unit in empty spot
 		PlayerTroops.add_unit(SUnit.unit, selected_pos)
+		unlock_store_unit(SUnit)
 		SUnit.queue_free()
 	else: # Placing unit over existing unit
 		var curr_unit = PlayerTroops.units[selected_pos]
@@ -91,4 +97,5 @@ func release_from_store(SUnit):
 			sell_unit(PlayerTroops.units[selected_pos])
 			PlayerTroops.remove_unit(selected_pos)
 			PlayerTroops.add_unit(SUnit.unit, selected_pos)
+		unlock_store_unit(SUnit)
 		SUnit.queue_free()
