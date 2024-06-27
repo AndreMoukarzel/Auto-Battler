@@ -8,8 +8,8 @@ func _on_buy_phase_to_battle():
 	# Start transition animation
 	$BuyPhase/HUD.hide()
 	$BuyPhase/PlayerHand.hide()
-	$BuyPhase/Camera3D/AnimationPlayer.play("to_battle")
-	await $BuyPhase/Camera3D/AnimationPlayer.animation_finished
+	$BuyPhase.transition_to_battle()
+	await $BuyPhase/CameraAnimation.animation_finished
 	
 	# At the end, hides Buy scene and reveals battle
 	$BuyPhase.hide()
@@ -22,7 +22,7 @@ func _on_buy_phase_to_battle():
 	$Battle.setup_armies(player_units, enemy_units)
 	$BattleUI.show()
 	
-	$BuyPhase/Camera3D/AnimationPlayer.play("RESET")
+	$BuyPhase.reset_animations()
 
 
 func _on_battle_to_buy_phase():

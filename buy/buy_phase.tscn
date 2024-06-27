@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bilpjgchhx7ns"]
+[gd_scene load_steps=28 format=3 uid="uid://bilpjgchhx7ns"]
 
 [ext_resource type="Script" path="res://buy/buy_phase.gd" id="1_wtqsm"]
 [ext_resource type="ArrayMesh" uid="uid://cl1sqrnbl7kt4" path="res://buy/meshes/grass.res" id="2_15lqb"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d4fudy47eviqp" path="res://buy/meshes/pedra.glb" id="3_evmex"]
 [ext_resource type="Script" path="res://buy/PlayerHand.gd" id="3_mm21w"]
 [ext_resource type="Texture2D" uid="uid://w4q3dy5ix0wh" path="res://units/sprites/1.png" id="4_ryro6"]
-[ext_resource type="PackedScene" uid="uid://cas6w4ggel57y" path="res://buy/meshes/plataforma.glb" id="5_eobh6"]
+[ext_resource type="PackedScene" uid="uid://cifqbnowmogvt" path="res://troop_stand.tscn" id="5_qk838"]
 [ext_resource type="Script" path="res://buy/Store.gd" id="5_w651e"]
 [ext_resource type="Texture2D" uid="uid://4bdhk5biaea3" path="res://buy/ui-sprites/board.png" id="6_6jngj"]
 [ext_resource type="Texture2D" uid="uid://bpwmj2aowx3th" path="res://buy/ui-sprites/coin.png" id="7_sj7wa"]
@@ -121,9 +121,6 @@ _data = {
 "to_battle": SubResource("Animation_7ptrd")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e562w"]
-size = Vector3(1.26, 1.055, 1.14)
-
 [node name="BuyPhase" type="Node3D"]
 script = ExtResource("1_wtqsm")
 
@@ -184,127 +181,44 @@ material = SubResource("FogMaterial_2pmrq")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0.7, 1.075, 4.5)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
-libraries = {
-"": SubResource("AnimationLibrary_h47bj")
-}
-
 [node name="PlayerTroops" type="Node3D" parent="."]
 script = ExtResource("2_bt5d1")
 
-[node name="Position0" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(0.962932, 0, 0.269743, 0, 1, 0, -0.269743, 0, 0.962932, -2, 0, -1.8)
-metadata/_edit_group_ = true
+[node name="Position0" parent="PlayerTroops" instance=ExtResource("5_qk838")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -1.8)
 
-[node name="Area3D" type="Area3D" parent="PlayerTroops/Position0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Platform" parent="PlayerTroops/Position0" index="1"]
+transform = Transform3D(0.360832, 0, -0.41509, 0, 0.55, 0, 0.41509, 0, 0.360832, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position0/Area3D"]
-shape = SubResource("BoxShape3D_e562w")
+[node name="Position1" parent="PlayerTroops" instance=ExtResource("5_qk838")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85, 0, 0)
 
-[node name="Platform" parent="PlayerTroops/Position0" instance=ExtResource("5_eobh6")]
-transform = Transform3D(0.117532, 0, -0.537295, 0, 0.55, 0, 0.537295, 0, 0.117532, 0, 0, 0)
+[node name="Platform" parent="PlayerTroops/Position1" index="1"]
+transform = Transform3D(-0.0953756, -0.00499843, -0.541644, -0.0287848, 0.549246, 0, 0.540902, 0.0283475, -0.0955064, 0, 0, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position0"]
-transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
-light_energy = 7.873
-spot_range = 5.915
-spot_angle = 23.45
-
-[node name="Position1" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84969, 0, 0)
-metadata/_edit_group_ = true
-
-[node name="Area3D" type="Area3D" parent="PlayerTroops/Position1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position1/Area3D"]
-shape = SubResource("BoxShape3D_e562w")
-
-[node name="Platform" parent="PlayerTroops/Position1" instance=ExtResource("5_eobh6")]
-transform = Transform3D(-0.108129, -0.00892448, -0.488086, -0.0263555, 0.499294, -0.00329069, 0.487456, 0.0250159, -0.108447, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position1"]
-transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
-light_energy = 7.873
-spot_range = 5.915
-spot_angle = 23.45
-
-[node name="Position2" type="Node3D" parent="PlayerTroops"]
+[node name="Position2" parent="PlayerTroops" instance=ExtResource("5_qk838")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.8)
-metadata/_edit_group_ = true
 
-[node name="Area3D" type="Area3D" parent="PlayerTroops/Position2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Platform" parent="PlayerTroops/Position2" index="1"]
+transform = Transform3D(-0.549916, 0, -0.00959885, 0, 0.55, 0, 0.00959885, 0, -0.549916, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position2/Area3D"]
-shape = SubResource("BoxShape3D_e562w")
+[node name="Position3" parent="PlayerTroops" instance=ExtResource("5_qk838")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Platform" parent="PlayerTroops/Position2" instance=ExtResource("5_eobh6")]
-transform = Transform3D(-0.543872, -0.0407692, 0.0710034, -0.0404262, 0.548487, 0.00527771, -0.0711993, 0, -0.545372, 0, 0, 0)
+[node name="Platform" parent="PlayerTroops/Position3" index="1"]
+transform = Transform3D(-0.038366, 0, -0.54866, 0, 0.55, 0, 0.54866, 0, -0.038366, 0, 0, 0)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position2"]
-transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
-light_energy = 7.873
-spot_range = 5.915
-spot_angle = 23.45
+[node name="Position4" parent="PlayerTroops" instance=ExtResource("5_qk838")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.425, 0, -1.8)
 
-[node name="Position3" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0396049, 0, 0)
-metadata/_edit_group_ = true
+[node name="Platform" parent="PlayerTroops/Position4" index="1"]
+transform = Transform3D(-0.155917, -0.0095363, -0.52735, -0.0335767, 0.548974, 0, 0.526367, 0.032194, -0.156208, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="PlayerTroops/Position3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Position5" parent="PlayerTroops" instance=ExtResource("5_qk838")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position3/Area3D"]
-shape = SubResource("BoxShape3D_e562w")
-
-[node name="Platform" parent="PlayerTroops/Position3" instance=ExtResource("5_eobh6")]
-transform = Transform3D(-0.0291778, 0, -0.549225, 0.0105437, 0.549899, -0.000560139, 0.549124, -0.0105586, -0.0291724, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position3"]
-transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
-light_energy = 7.873
-spot_range = 5.915
-spot_angle = 23.45
-
-[node name="Position4" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42542, 0, -1.8)
-metadata/_edit_group_ = true
-
-[node name="Area3D" type="Area3D" parent="PlayerTroops/Position4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position4/Area3D"]
-shape = SubResource("BoxShape3D_e562w")
-
-[node name="Platform" parent="PlayerTroops/Position4" instance=ExtResource("5_eobh6")]
-transform = Transform3D(-0.167557, -0.0550994, -0.52095, -0.0389684, 0.546745, -0.0452939, 0.522404, 0.0231114, -0.170469, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position4"]
-transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
-light_energy = 7.873
-spot_range = 5.915
-spot_angle = 23.45
-
-[node name="Position5" type="Node3D" parent="PlayerTroops"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.61763, 0, 0)
-metadata/_edit_group_ = true
-
-[node name="Area3D" type="Area3D" parent="PlayerTroops/Position5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTroops/Position5/Area3D"]
-shape = SubResource("BoxShape3D_e562w")
-
-[node name="Platform" parent="PlayerTroops/Position5" instance=ExtResource("5_eobh6")]
-transform = Transform3D(0.516075, 0, 0.190175, 0, 0.55, 0, -0.190175, 0, 0.516075, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="PlayerTroops/Position5"]
-transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
-light_energy = 7.873
-spot_range = 5.915
-spot_angle = 23.45
+[node name="Platform" parent="PlayerTroops/Position5" index="1"]
+transform = Transform3D(0.506277, 0, 0.214902, 0, 0.55, 0, -0.214902, 0, 0.506277, 0, 0, 0)
 
 [node name="PlayerHand" type="Control" parent="."]
 layout_mode = 3
@@ -482,5 +396,18 @@ texture_normal = ExtResource("10_wg7t2")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="CameraAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera3D")
+libraries = {
+"": SubResource("AnimationLibrary_h47bj")
+}
+
 [connection signal="button_up" from="HUD/Reroll" to="." method="_on_reroll_button_up"]
 [connection signal="button_up" from="HUD/ToBattle" to="." method="_on_to_battle_button_up"]
+
+[editable path="PlayerTroops/Position0"]
+[editable path="PlayerTroops/Position1"]
+[editable path="PlayerTroops/Position2"]
+[editable path="PlayerTroops/Position3"]
+[editable path="PlayerTroops/Position4"]
+[editable path="PlayerTroops/Position5"]

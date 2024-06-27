@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cifqbnowmogvt"]
+
+[ext_resource type="Script" path="res://troop_stand.gd" id="1_16rfr"]
+[ext_resource type="PackedScene" uid="uid://cas6w4ggel57y" path="res://buy/meshes/plataforma.glb" id="1_rpkj3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e562w"]
+size = Vector3(1.26, 1.055, 1.14)
+
+[node name="TroopStand" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.21645e-15, 0)
+script = ExtResource("1_16rfr")
+metadata/_edit_group_ = true
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_e562w")
+
+[node name="Platform" parent="." instance=ExtResource("1_rpkj3")]
+transform = Transform3D(-2.40412e-08, 0, -0.55, 0, 0.55, 0, 0.55, 0, -2.40412e-08, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.985949, -0.0501599, -0.159339, 0.159339, 0.568808, 0.806888, 0.0501597, -0.820939, 0.568808, -0.44621, 2.81565, 2.07112)
+light_energy = 7.873
+spot_range = 5.915
+spot_angle = 23.45

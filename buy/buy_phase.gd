@@ -48,6 +48,19 @@ func get_troops():
 	return units_copy
 
 
+func transition_to_battle():
+	$CameraAnimation.play("to_battle")
+	for stand in $PlayerTroops.get_children():
+		stand.launch()
+
+
+func reset_animations():
+	$CameraAnimation.play("RESET")
+	for stand in $PlayerTroops.get_children():
+		stand.position.y = 0
+		stand.show()
+
+
 func _on_reroll_button_up():
 	if money >= 1:
 		money -= 1
