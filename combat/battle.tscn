@@ -1,14 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdfet3llmdvi8"]
+[gd_scene load_steps=14 format=3 uid="uid://bdfet3llmdvi8"]
 
 [ext_resource type="Script" path="res://combat/battle.gd" id="1_exgs1"]
 [ext_resource type="PackedScene" uid="uid://dprmfccfu4ywe" path="res://combat/Battlefield.tscn" id="2_2lrue"]
+[ext_resource type="Texture2D" uid="uid://dtpr1nc1ynj82" path="res://combat/cloud_texture.png" id="3_7462d"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_86upm"]
-size = Vector3(20, 1, 60)
+[sub_resource type="Gradient" id="Gradient_dc0ej"]
+offsets = PackedFloat32Array(0.198113, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hl5bg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aegq7"]
+seamless = true
+color_ramp = SubResource("Gradient_dc0ej")
+noise = SubResource("FastNoiseLite_hl5bg")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1kyek"]
 sky_top_color = Color(0.101356, 0.45492, 0.781121, 1)
-sky_horizon_color = Color(0.715883, 0.636485, 0.601926, 1)
+sky_horizon_color = Color(0.712595, 0.745007, 0.790434, 1)
+sky_cover = SubResource("NoiseTexture2D_aegq7")
+ground_bottom_color = Color(0.608631, 0.76516, 0.876337, 1)
+ground_horizon_color = Color(0.713726, 0.745098, 0.792157, 1)
+ground_energy_multiplier = 1.25
 
 [sub_resource type="Sky" id="Sky_y1imi"]
 sky_material = SubResource("ProceduralSkyMaterial_1kyek")
@@ -16,21 +28,43 @@ sky_material = SubResource("ProceduralSkyMaterial_1kyek")
 [sub_resource type="Environment" id="Environment_okcgk"]
 background_mode = 2
 sky = SubResource("Sky_y1imi")
+volumetric_fog_density = 0.0
+volumetric_fog_emission = Color(0.894922, 0.894922, 0.894922, 1)
+volumetric_fog_emission_energy = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_86upm"]
+size = Vector3(20, 1, 60)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttgvp"]
+emission_shape = 3
+emission_box_extents = Vector3(5, 2, 4)
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o7a75"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_7462d")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_xe0e7"]
+material = SubResource("StandardMaterial3D_o7a75")
+size = Vector2(5, 5)
 
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_exgs1")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.994194, -0.0238203, 0.10493, 0, 0.975188, 0.221378, -0.1076, -0.220093, 0.969526, 0.939174, 2.88064, 8.14616)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_okcgk")
 
 [node name="Battlefield" parent="." instance=ExtResource("2_2lrue")]
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.994194, -0.0238203, 0.10493, 0, 0.975188, 0.221378, -0.1076, -0.220093, 0.969526, 0.939174, 2.88064, 8.14616)
+
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_86upm")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_okcgk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.855798, -0.261792, 0.446178, 0.106424, 0.933145, 0.343388, -0.506245, -0.246386, 0.826444, 3.28163, 2.06736, 3.85853)
@@ -40,6 +74,13 @@ shadow_enabled = true
 
 [node name="BattleTimer" type="Timer" parent="."]
 wait_time = 0.6
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 50
+lifetime = 60.0
+explosiveness = 0.98
+process_material = SubResource("ParticleProcessMaterial_ttgvp")
+draw_pass_1 = SubResource("QuadMesh_xe0e7")
 
 [connection signal="battle_done" from="Battlefield" to="." method="_on_battlefield_battle_done"]
 [connection signal="timeout" from="BattleTimer" to="." method="_on_battle_timer_timeout"]
